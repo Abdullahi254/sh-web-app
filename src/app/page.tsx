@@ -47,7 +47,7 @@ export default function Home() {
         </div>
         <Image
           src={sc2}
-          alt='api code'
+          alt='api-code'
           priority
           className='rounded-lg'
           width={300}
