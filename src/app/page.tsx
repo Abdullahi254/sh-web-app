@@ -4,7 +4,7 @@ import sc1 from "../../public/app.jpg"
 import sc2 from "../../public/api.jpg"
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between py-20 px-6 max-w-7xl mx-auto">
+    <main className="flex flex-col items-center justify-between py-20 px-6 max-w-7xl mx-auto">
 
       <div className='flex justify-evenly items-center p-8 flex-wrap w-full'>
         <Image
@@ -60,6 +60,3 @@ export default function Home() {
     </main>
   )
 }
-
-
-//#9c92ac
