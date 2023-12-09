@@ -43,6 +43,11 @@ const Navbar = (props: Props) => {
                                 Search
                             </span>
                         </Link>
+                        <Link href="/dictionary">
+                            <span className={pathName === '/dictionary' ? `text-sm text-gray-900 underline` : `text-gray-500 text-sm hover:text-gray-900 hover:underline`}>
+                                Dictionary
+                            </span>
+                        </Link>
                     </div>
                 </div>
 
