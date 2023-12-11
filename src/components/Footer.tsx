@@ -31,14 +31,9 @@ const Footer = (props: Props) => {
                                 Dictionary
                             </span>
                         </Link>
-                        <Link href="/contact">
-                            <span className={`text-gray-500 text-sm hover:text-gray-900 hover:underline`}>
-                                Contact
-                            </span>
-                        </Link>
                         <Link href="https://github.com/Abdullahi254" target='_blank'>
                             <span className={`text-gray-500 text-sm hover:text-gray-900 hover:underline`}>
-                                github
+                                Github
                             </span>
                         </Link>
                     </div>
