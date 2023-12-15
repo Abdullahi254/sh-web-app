@@ -1,36 +1,43 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import DropDown from '@/components/DropDown'
+export type Word = {
+    id: number
+    word: string
+    examples: string
+    synonym: string
+    contributor_id: number
+}
 type Props = {}
 
-const page = (props: Props) => {
+async function getWordsByLetter(letter: string): Promise<Word[]> {
+    try {
+        const res = await fetch(`https://sheng-api.onrender.com/api/word?letter=${letter}`)
+        return res.json()
+
+    } catch (er) {
+        throw new Error('Failed to fetch data')
+    }
+}
+
+
+const page = async (props: Props) => {
+    const fetchWords = async (letter: string) => {
+        const data = await getWordsByLetter(letter)
+        return data
+    }
     return (
         <main className="flex flex-col space-y-4 min-h-screen items-center py-20 px-6 max-w-4xl mx-auto">
-            <DropDown>A</DropDown>
-            <DropDown>B</DropDown>
-            <DropDown>C</DropDown>
-            <DropDown>D</DropDown>
-            <DropDown>E</DropDown>
-            <DropDown>F</DropDown>
-            <DropDown>G</DropDown>
-            <DropDown>H</DropDown>
-            <DropDown>I</DropDown>
-            <DropDown>J</DropDown>
-            <DropDown>K</DropDown>
-            <DropDown>L</DropDown>
-            <DropDown>M</DropDown>
-            <DropDown>N</DropDown>
-            <DropDown>O</DropDown>
-            <DropDown>P</DropDown>
-            <DropDown>Q</DropDown>
-            <DropDown>R</DropDown>
-            <DropDown>S</DropDown>
-            <DropDown>T</DropDown>
-            <DropDown>U</DropDown>
-            <DropDown>V</DropDown>
-            <DropDown>W</DropDown>
-            <DropDown>X</DropDown>
-            <DropDown>Y</DropDown>
-            <DropDown>Z</DropDown>
+            {
+                [...Array(26)].map((_, index) =>
+                    <Suspense key={index} fallback={<div>Loading...</div>}>
+                        <DropDown
+                            triggerFetch={fetchWords(String.fromCharCode("A".charCodeAt(0) + index))}
+                        >
+                            {String.fromCharCode("A".charCodeAt(0) + index)}
+                        </DropDown>
+                    </Suspense>
+                )
+            }
         </main>
     )
 }
