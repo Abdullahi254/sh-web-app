@@ -2,6 +2,7 @@ import React, { Suspense } from 'react'
 import DropDown from '@/components/DropDown'
 export type Word = {
     id: number
+    meaning: string
     word: string
     examples: string
     synonym: string
