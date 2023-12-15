@@ -2,9 +2,25 @@ import React from 'react'
 import { GiBlackBook } from "react-icons/gi";
 import { CiSearch } from "react-icons/ci";
 import Link from 'next/link';
-type Props = {}
+import { Word } from '@/app/dictionary/page';
+type Props = {
+  params: {
+    search: string
+  }
+}
 
-const page = async (props: Props) => {
+const getWordData = async (word: string) => {
+  try {
+    const res = await fetch(`https://sheng-api.onrender.com/api/word-details?word=${word}`)
+    return res.json()
+
+  } catch (er) {
+    throw new Error('Failed to fetch data')
+  }
+}
+
+const page = async ({ params }: Props) => {
+  const data: Word = await getWordData(params.search)
   return (
     <main className="flex flex-col space-y-8 min-h-screen items-center py-20 px-6 max-w-4xl mx-auto">
 
@@ -26,7 +42,7 @@ const page = async (props: Props) => {
       </form>
 
       <div className='flex w-full items-center p-4 border-b-2 border-gray-400'>
-        <h1 className='font-bold text-2xl md:text-4xl text-gray-800 font-serif'>Bonga</h1>
+        <h1 className='font-bold text-2xl md:text-4xl text-gray-800 font-serif'>{data.word}</h1>
       </div>
 
       <div className='flex flex-col space-y-4 w-full p-4 border-b-2 border-gray-400'>
@@ -34,7 +50,12 @@ const page = async (props: Props) => {
           Meaning:
         </h2>
         <ul className='ps-4 space-y-1 list-disc list-inside text-sm md:text-base tracking-wide'>
-          <li>Directly translated to mean &apos;speak&apos;.</li>
+          {
+            data.meaning.split(",").map((val, index) =>
+              <li key={index}>
+                {val}
+              </li>)
+          }
         </ul>
 
       </div>
@@ -44,8 +65,12 @@ const page = async (props: Props) => {
           Examples:
         </h2>
         <ul className='ps-4 space-y-1 list-disc list-inside text-sm md:text-base tracking-wide'>
-          <li>Nimebonga na yeye jana usiku.</li>
-          <li>Yule jamaa hupenda kubonga sana.</li>
+          {
+            data.examples.split(",").map((val, index) =>
+              <li key={index}>
+                {val}
+              </li>)
+          }
         </ul>
       </div>
 
@@ -54,9 +79,12 @@ const page = async (props: Props) => {
           Synonyms:
         </h2>
         <ul className='ps-4 space-y-1 list-disc list-inside text-sm md:text-base tracking-wide'>
-          <li>Banja.</li>
-          <li>Talk.</li>
-          <li>Sema.</li>
+          {
+            data.synonym.split(",").map((val, index) =>
+              <li key={index}>
+                {val}
+              </li>)
+          }
         </ul>
       </div>
 
