@@ -39,7 +39,7 @@ const Navbar = (props: Props) => {
                                 Home
                             </span>
                         </Link>
-                        <Link href="/search">
+                        <Link href="/search/bamba">
                             <span className={pathName === `/search/${params.search}` ? `text-sm text-gray-900 underline` : `text-gray-500 text-sm hover:text-gray-900 hover:underline`}>
                                 Search
                             </span>
