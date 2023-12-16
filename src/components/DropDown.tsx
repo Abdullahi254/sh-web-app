@@ -5,7 +5,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { Word } from '@/app/dictionary/page';
 type Props = {
     children: ReactNode,
-    triggerFetch : Promise<Word[]>
+    triggerFetch: Promise<Word[]>
 }
 
 const DropDown = ({ children, triggerFetch }: Props) => {
@@ -13,9 +13,11 @@ const DropDown = ({ children, triggerFetch }: Props) => {
     const [words, setWords] = useState<Word[]>()
     const openDropDown = () => {
         setShow(prev => !prev)
-        triggerFetch.then(res=>{
-            setWords(res as Word[])
-        })
+        if (show === true) {
+            triggerFetch.then(res => {
+                setWords(res as Word[])
+            })
+        }
     }
     return (
         <div className='flex flex-col items-center w-full p-4 shadow-lg hover:shadow-xl rounded-lg bg-white relative'>
