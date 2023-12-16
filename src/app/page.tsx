@@ -20,13 +20,12 @@ export default function Home() {
         </div>
       </div>
 
-      <div className='flex justify-evenly items-center p-8 flex-wrap w-full'>
+      <div className='flex justify-evenly items-start p-8 flex-wrap w-full'>
         <Image
           src={sc1}
           alt='Web app'
           priority
           className='rounded-lg mb-8'
-          width={300}
           height={300}
         />
         <div className=' flex flex-col space-y-4'>
@@ -37,7 +36,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className='flex justify-evenly items-center p-8 flex-wrap w-full'>
+      <div className='flex justify-evenly items-start p-8 flex-wrap w-full'>
         <div className=' flex flex-col space-y-4 mb-8'>
           <h1 className=' font-semibold text-xl tracking-widest'>API</h1>
           <p className='tracking-wider max-w-xs sm:text-sm'>
@@ -50,7 +49,6 @@ export default function Home() {
           alt='api-code'
           priority
           className='rounded-lg'
-          width={300}
           height={300}
         />
       </div>
