@@ -14,7 +14,7 @@ async function getWordsByLetter(letter: string): Promise<Word[]> {
         throw new Error('Failed to fetch data')
     }
 }
-
+// server component that fetches a list of words by letter
 const LetterCard = async ({ letter }: Props) => {
     const words = await getWordsByLetter(letter)
     return (
