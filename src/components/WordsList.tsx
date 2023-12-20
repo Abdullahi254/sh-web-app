@@ -19,7 +19,7 @@ const LetterCard = async ({ letter }: Props) => {
     const words = await getWordsByLetter(letter)
     return (
         <>
-            {words?.map((val) => <Link key={val.id} href={`/search/${val.word}`} className='h-fit'>
+            {words && words?.map((val) => <Link key={val.id} href={`/search/${val.word}`} className='h-fit'>
                 <span className='font-serif hover:bg-sky-100 hover:underline'>{val.word}</span>
             </Link>)}
         </>
