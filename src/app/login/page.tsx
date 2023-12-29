@@ -1,5 +1,6 @@
 import React from 'react'
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 type Props = {}
 
@@ -28,6 +29,7 @@ const page = (props: Props) => {
         } catch (er) {
             console.log(er)
         }
+        redirect("/add")
     }
     return (
         <main className="flex flex-col space-y-4 min-h-screen items-center py-20 px-6 max-w-4xl mx-auto">
