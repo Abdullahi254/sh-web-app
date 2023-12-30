@@ -25,8 +25,10 @@ const page = (props: Props) => {
                 throw new Error('Network response was not ok');
             }
             const responseData = await res.json();
+            cookies().delete('apiToken')
             cookies().set('apiToken', responseData.token)
         } catch (er) {
+            cookies().delete('apiToken')
             console.log(er)
         }
         redirect("/add")
