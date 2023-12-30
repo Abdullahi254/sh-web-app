@@ -2,6 +2,9 @@ import React from 'react'
 import WordForm from '@/components/wordForm'
 import { cookies } from 'next/headers'
 import RedirectComponent from '@/components/RedirectComponent'
+
+export const dynamic = 'force-dynamic'
+
 type Props = {}
 
 const page = async (props: Props) => {
