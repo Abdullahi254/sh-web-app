@@ -2,26 +2,33 @@
 import React, { useState } from 'react'
 import { IoIosAdd, IoIosRemove } from "react-icons/io";
 
-type Props = {}
+type Props = {
+    addWord: (userId: string, formData: FormData) => Promise<void>
+    userId: string
+}
 
-const WordForm = (props: Props) => {
+const WordForm = ({ addWord, userId }: Props) => {
     const [meaningCount, setMeaningCount] = useState<number[]>([0])
     const [examplesCount, setExamplesCount] = useState<number[]>([0])
     const [synonymsCount, setSynonymsCount] = useState<number[]>([0])
+
+    const addWordwithId = addWord.bind(null, userId)
     return (
-        <form className="w-[50%] mx-auto">
+        <form className="w-[50%] mx-auto" action={addWordwithId}>
             <div className="relative z-0 w-full mb-5 group">
-                <input name="word" id="word" className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-gray-600 peer" placeholder=" " required />
-                <label htmlFor="word" className="peer-focus:font-medium absolute text-sm text-gray-800  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-gray-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Word:</label>
+                <label htmlFor="word" className='text-gray-800 text-sm'>Word:</label>
+                <input name="word" id="word" className="text-gray-700 font-semibold block py-2.5 px-1 w-full text-sm bg-transparent border-0 border-b-2 border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-gray-600 peer" placeholder=" " required />
             </div>
 
             <div className="relative z-0 w-full mb-5 group">
-                <span className='text-gray-800 text-sm'>Meaning:</span>
+            <label htmlFor="meaning" className='text-gray-800 text-sm'>Meaning:</label>
                 {
                     meaningCount.map(val =>
-                        <input key={val+1}
+                        <input key={val + 1}
+                            name="meaning"
+                            id="meaning"
                             placeholder={`val: ${val + 1}`}
-                            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-gray-600 peer"
+                            className="text-gray-700 font-semibold block py-2.5 px-1 w-full text-sm bg-transparent border-0 border-b-2 border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-gray-600 peer"
                             required />
                     )
                 }
@@ -33,12 +40,14 @@ const WordForm = (props: Props) => {
             </div>
 
             <div className="relative z-0 w-full mb-5 group">
-                <span className='text-gray-800 text-sm'>Examples:</span>
+            <label htmlFor="example" className='text-gray-800 text-sm'>Examples:</label>
                 {
                     examplesCount.map(val =>
-                        <input key={val+1}
+                        <input key={val + 1}
+                            name="example"
+                            id="example"
                             placeholder={`val: ${val + 1}`}
-                            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-gray-600 peer"
+                            className="text-gray-700 font-semibold block py-2.5 px-1 w-full text-sm bg-transparent border-0 border-b-2 border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-gray-600 peer"
                             required />
                     )
                 }
@@ -50,12 +59,14 @@ const WordForm = (props: Props) => {
             </div>
 
             <div className="relative z-0 w-full mb-5 group">
-                <span className='text-gray-800 text-sm'>Synonyms:</span>
+            <label htmlFor="synonym" className='text-gray-800 text-sm'>Synonyms:</label>
                 {
                     synonymsCount.map(val =>
-                        <input key={val+1}
+                        <input key={val + 1}
+                            name="synonym"
+                            id="synonym"
                             placeholder={`val: ${val + 1}`}
-                            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-gray-600 peer"
+                            className="text-gray-700 font-semibold block py-2.5 px-1 w-full text-sm bg-transparent border-0 border-b-2 border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-gray-600 peer"
                             required />
                     )
                 }
