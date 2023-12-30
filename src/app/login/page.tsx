@@ -29,6 +29,7 @@ const page = (props: Props) => {
             const responseData = await res.json();
             cookies().delete('apiToken')
             cookies().set('apiToken', responseData.token)
+            cookies().set('userId', responseData.id)
         } catch (er) {
             cookies().delete('apiToken')
             console.log(er)
