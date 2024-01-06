@@ -2,10 +2,15 @@ import Image from 'next/image'
 import logo from "../../public/Sheng.png"
 import sc1 from "../../public/app.jpg"
 import sc2 from "../../public/api.jpg"
+import Link from 'next/link';
 export default function Home() {
   return (
     <main className="flex flex-col items-center justify-between py-20 px-6 max-w-7xl mx-auto">
-
+      <div className='flex justify-end items-center px-8 py-2 flex-wrap w-full'>
+        <Link href="/login">
+          <button className='bg-gray-700 text-sm md:text-base hover:bg-gray-900 text-white font-bold py-2 px-4 rounded-xl'>Login</button>
+        </Link>
+      </div>
       <div className='flex justify-evenly items-center p-8 flex-wrap w-full'>
         <Image
           src={logo}
