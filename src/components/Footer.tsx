@@ -21,14 +21,14 @@ const Footer = (props: Props) => {
                                 Home
                             </span>
                         </Link>
-                        <Link href="/search">
-                            <span className={`text-gray-500 text-sm hover:text-gray-900 hover:underline`}>
-                                Search
-                            </span>
-                        </Link>
                         <Link href="/dictionary">
                             <span className={`text-gray-500 text-sm hover:text-gray-900 hover:underline`}>
                                 Dictionary
+                            </span>
+                        </Link>
+                        <Link href="/join">
+                            <span className={`text-gray-500 text-sm hover:text-gray-900 hover:underline`}>
+                                Join
                             </span>
                         </Link>
                         <Link href="https://github.com/Abdullahi254" target='_blank'>
