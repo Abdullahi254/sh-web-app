@@ -1,5 +1,6 @@
 import JoinForm from '@/components/JoinForm'
 import React from 'react'
+import { addJoinInfo } from '../actions'
 
 type Props = {}
 
@@ -10,11 +11,11 @@ const page = (props: Props) => {
                 <h1 className='text-xl lg:text-2xl font-medium tracking-wide underline'>
                     Welcome aboard!
                 </h1>
-                <h2 className='text-sm lg:text-base font-medium tracking-widest'>
-                    Fill in the form and we&apos;ll get back to you.
+                <h2 className='text-sm lg:text-base font-medium tracking-wider'>
+                    Fill in the form to contribute in adding words to the database.
                 </h2>
             </div>
-            <JoinForm />
+            <JoinForm addJoinInfo={addJoinInfo}/>
         </main>
     )
 }
