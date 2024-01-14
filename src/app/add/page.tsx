@@ -14,10 +14,10 @@ const page = async (props: Props) => {
         const userId = cookies().get("userId")?.value
         const res = await fetch(`https://sheng-api.onrender.com/users/checktoken?token=${token}`)
         console.log(res.status)
-        if (res.status === 200) {
+        if (res.status === 200 && token) {
             return (
                 <main className="flex flex-col space-y-4 min-h-screen items-center py-20 px-6 max-w-4xl mx-auto">
-                    <WordForm addWord={addWord} userId={userId as string} />
+                    <WordForm addWord={addWord} token={token} />
                 </main>
             )
         } else {

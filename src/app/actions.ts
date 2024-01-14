@@ -1,17 +1,32 @@
 'use server'
 
-export async function addWord(userId: string, formData: FormData) {
-    const rawFormData = {
-        word: formData.get("word"),
-        meaningList: formData.getAll("meaning"),
-        exampleList: formData.getAll("example"),
-        synonymList: formData.getAll("synonym")
+export async function addWord(token: string, formData: FormData) {
+    try {
+        const rawFormData = {
+            word: formData.get("word"),
+            meaning: formData.getAll("meaning").join(", "),
+            examples: formData.getAll("example").join(", "),
+            synonym: formData.getAll("synonym").join(", ")
+        }
+        const res = await fetch(`https://sheng-api.onrender.com/api/word?token=${token}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(rawFormData)
+            })
+        console.log({
+            ...rawFormData,
+            token
+        })
+        return {
+            message : res.status
+        } 
+    } catch (er) {
+        throw new Error('Failed to add word')
     }
-    const id = parseInt(userId)
-    console.log({
-        ...rawFormData,
-        id
-    })
+
 }
 
 export async function addJoinInfo(formData: FormData) {

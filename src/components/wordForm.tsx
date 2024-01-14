@@ -1,20 +1,27 @@
 "use client";
 import React, { useState } from 'react'
+import { useFormState } from 'react-dom'
 import { IoIosAdd, IoIosRemove } from "react-icons/io";
 
 type Props = {
-    addWord: (userId: string, formData: FormData) => Promise<void>
-    userId: string
+    addWord: (token: string, formData: FormData) => Promise<{message: number}>
+    token: string
 }
 
-const WordForm = ({ addWord, userId }: Props) => {
+const initialState = {
+    status: 2,
+  }
+
+const WordForm = ({ addWord, token }: Props) => {
     const [meaningCount, setMeaningCount] = useState<number[]>([0])
     const [examplesCount, setExamplesCount] = useState<number[]>([0])
     const [synonymsCount, setSynonymsCount] = useState<number[]>([0])
 
-    const addWordwithId = addWord.bind(null, userId)
+    const addWordwithToken = addWord.bind(null, token)
+
+    // const [state, formAction] = useFormState(addWordwithToken, initialState)
     return (
-        <form className="w-[50%] mx-auto" action={addWordwithId}>
+        <form className="w-[50%] mx-auto" action={addWordwithToken}>
             <div className="relative z-0 w-full mb-5 group">
                 <label htmlFor="word" className='text-gray-800 text-sm'>Word:</label>
                 <input name="word" id="word" className="text-gray-700 font-semibold block py-2.5 px-1 w-full text-sm bg-transparent border-0 border-b-2 border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-gray-600 peer" placeholder=" " required />
