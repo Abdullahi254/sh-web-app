@@ -4,13 +4,14 @@ import { useFormState } from 'react-dom'
 import { IoIosAdd, IoIosRemove } from "react-icons/io";
 
 type Props = {
-    addWord: (token: string, formData: FormData) => Promise<{message: number}>
+    addWord: (token: string, prevState: any, formData: FormData) => Promise<{ message: number }>
     token: string
 }
 
 const initialState = {
-    status: 2,
-  }
+    message: 0
+}
+
 
 const WordForm = ({ addWord, token }: Props) => {
     const [meaningCount, setMeaningCount] = useState<number[]>([0])
@@ -19,16 +20,27 @@ const WordForm = ({ addWord, token }: Props) => {
 
     const addWordwithToken = addWord.bind(null, token)
 
-    // const [state, formAction] = useFormState(addWordwithToken, initialState)
+    const [state, formAction] = useFormState(addWordwithToken, initialState)
     return (
-        <form className="w-[50%] mx-auto" action={addWordwithToken}>
+        <form className="w-[50%] mx-auto" action={formAction}>
+            {
+                state.message === 0 ? '' :
+                    state.message === 200 ?
+                        <div className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+                            <span className="font-medium">Success alert!</span> Successfully added word.
+                        </div> :
+                        <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                            <span className="font-medium">Error alert!</span> Failed to add word.
+                        </div>
+
+            }
             <div className="relative z-0 w-full mb-5 group">
                 <label htmlFor="word" className='text-gray-800 text-sm'>Word:</label>
                 <input name="word" id="word" className="text-gray-700 font-semibold block py-2.5 px-1 w-full text-sm bg-transparent border-0 border-b-2 border-gray-400 appearance-none focus:outline-none focus:ring-0 focus:border-gray-600 peer" placeholder=" " required />
             </div>
 
             <div className="relative z-0 w-full mb-5 group">
-            <label htmlFor="meaning" className='text-gray-800 text-sm'>Meaning:</label>
+                <label htmlFor="meaning" className='text-gray-800 text-sm'>Meaning:</label>
                 {
                     meaningCount.map(val =>
                         <input key={val + 1}
@@ -47,7 +59,7 @@ const WordForm = ({ addWord, token }: Props) => {
             </div>
 
             <div className="relative z-0 w-full mb-5 group">
-            <label htmlFor="example" className='text-gray-800 text-sm'>Examples:</label>
+                <label htmlFor="example" className='text-gray-800 text-sm'>Examples:</label>
                 {
                     examplesCount.map(val =>
                         <input key={val + 1}
@@ -66,7 +78,7 @@ const WordForm = ({ addWord, token }: Props) => {
             </div>
 
             <div className="relative z-0 w-full mb-5 group">
-            <label htmlFor="synonym" className='text-gray-800 text-sm'>Synonyms:</label>
+                <label htmlFor="synonym" className='text-gray-800 text-sm'>Synonyms:</label>
                 {
                     synonymsCount.map(val =>
                         <input key={val + 1}

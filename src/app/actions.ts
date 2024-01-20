@@ -1,6 +1,6 @@
 'use server'
 
-export async function addWord(token: string, formData: FormData) {
+export async function addWord(token: string, prevState: any, formData: FormData) {
     try {
         const rawFormData = {
             word: formData.get("word"),
@@ -16,13 +16,9 @@ export async function addWord(token: string, formData: FormData) {
                 },
                 body: JSON.stringify(rawFormData)
             })
-        console.log({
-            ...rawFormData,
-            token
-        })
         return {
-            message : res.status
-        } 
+            message: 200
+        }
     } catch (er) {
         throw new Error('Failed to add word')
     }
