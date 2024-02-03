@@ -10,6 +10,8 @@ const page = (props: Props) => {
     async function loginUser(formData: FormData) {
         'use server'
         try {
+            cookies().delete('apiToken')
+            cookies().delete('userId')
             const rawFormData = {
                 userName: formData.get("username"),
                 password: formData.get("password")
@@ -27,11 +29,11 @@ const page = (props: Props) => {
                 throw new Error('Network response was not ok');
             }
             const responseData = await res.json();
-            cookies().delete('apiToken')
             cookies().set('apiToken', responseData.token)
             cookies().set('userId', responseData.id)
         } catch (er) {
             cookies().delete('apiToken')
+            cookies().delete('userId')
             console.log(er)
         }
         redirect("/add")
