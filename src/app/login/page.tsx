@@ -27,9 +27,10 @@ const page = (props: Props) => {
                 throw new Error('Network response was not ok');
             }
             const responseData = await res.json();
-            const oneHour = 59 * 60 * 1000
-            cookies().set('apiToken', responseData.token, {expires: Date.now() - oneHour})
-            cookies().set('userId', responseData.id, {expires: Date.now() - oneHour})
+            cookies().delete("apiToken")
+            cookies().delete("userId")
+            cookies().set('apiToken', responseData.token)
+            cookies().set('userId', responseData.id)
         } catch (er) {
             console.log(er)
         }
