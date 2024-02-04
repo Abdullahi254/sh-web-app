@@ -10,8 +10,6 @@ const page = (props: Props) => {
     async function loginUser(formData: FormData) {
         'use server'
         try {
-            cookies().delete('apiToken')
-            cookies().delete('userId')
             const rawFormData = {
                 userName: formData.get("username"),
                 password: formData.get("password")
@@ -32,8 +30,6 @@ const page = (props: Props) => {
             cookies().set('apiToken', responseData.token)
             cookies().set('userId', responseData.id)
         } catch (er) {
-            cookies().delete('apiToken')
-            cookies().delete('userId')
             console.log(er)
         }
         redirect("/add")
