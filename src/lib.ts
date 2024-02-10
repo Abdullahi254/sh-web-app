@@ -33,7 +33,6 @@ export const login = async (formData: FormData) => {
         })
     } catch (er) {
         console.log(er)
-        throw new Error("Error logging In!")
     }
 }
 
@@ -47,6 +46,5 @@ export const getSession = async () => {
         }
     } catch (er) {
         console.log(er)
-        throw new Error("Error getting token!")
     }
 }
