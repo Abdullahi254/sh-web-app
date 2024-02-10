@@ -1,6 +1,7 @@
 import React from 'react'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { login } from "@/lib"
 
 export const dynamic = 'force-dynamic'
 
@@ -9,39 +10,7 @@ type Props = {}
 const page = (props: Props) => {
     async function loginUser(formData: FormData) {
         'use server'
-        try {
-            const rawFormData = {
-                userName: formData.get("username"),
-                password: formData.get("password")
-            }
-            console.log(rawFormData)
-            const res = await fetch(`https://sheng-api.onrender.com/users/generate/collabtoken`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(rawFormData)
-                })
-            if (!res.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const responseData = await res.json();
-            cookies().delete("apiToken")
-            cookies().delete("userId")
-            cookies().set({
-                name: "apiToken",
-                value: responseData.token,
-                httpOnly: true
-            })
-            cookies().set({
-                name: "userId",
-                value: responseData.id,
-                httpOnly: true
-            })
-        } catch (er) {
-            console.log(er)
-        }
+        await login(formData)
         redirect("/add")
     }
     return (
