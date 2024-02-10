@@ -7,7 +7,7 @@ type Props = {
 
 async function getWordsByLetter(letter: string): Promise<Word[]> {
     try {
-        const res = await fetch(`https://sheng-api.onrender.com/api/word?letter=${letter}`)
+        const res = await fetch(`https://sheng-api.onrender.com/api/word?letter=${letter}`, {next:{revalidate:60}})
         return res.json()
 
     } catch (er) {
