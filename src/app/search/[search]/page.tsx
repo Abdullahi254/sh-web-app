@@ -59,7 +59,7 @@ const Page = async ({ params }: Props) => {
           </h2>
           <ul className='ps-4 space-y-1 list-disc list-inside text-sm md:text-base tracking-wide'>
             {
-              data.examples.split(",").map((val, index) =>
+              data.examples?.split(",").map((val, index) =>
                 <li key={index}>
                   {val}
                 </li>)
@@ -73,7 +73,7 @@ const Page = async ({ params }: Props) => {
           </h2>
           <ul className='ps-4 space-y-1 list-disc list-inside text-sm md:text-base tracking-wide'>
             {
-              data.synonym.split(",").map((val, index) =>
+              data.synonym?.split(",").map((val, index) =>
                 <li key={index}>
                   {val}
                 </li>)
