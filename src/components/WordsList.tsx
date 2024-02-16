@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Word } from '@/app/dictionary/page';
 import Link from 'next/link';
 type Props = {
@@ -7,7 +7,7 @@ type Props = {
 
 async function getWordsByLetter(letter: string): Promise<Word[]> {
     try {
-        const res = await fetch(`https://sheng-api.onrender.com/api/word?letter=${letter}`, {next:{revalidate:60}})
+        const res = await fetch(`https://sheng-api.onrender.com/api/word?letter=${letter}`, { next: { revalidate: 60 } })
         return res.json()
 
     } catch (er) {
@@ -19,9 +19,11 @@ const LetterCard = async ({ letter }: Props) => {
     const words = await getWordsByLetter(letter)
     return (
         <>
-            {words && words?.map((val) => <Link key={val.id} href={`/search/${val.word}`} className='h-fit'>
-                <span className='font-serif hover:bg-sky-100 hover:underline'>{val.word}</span>
-            </Link>)}
+            < Suspense fallback={< div > Loading...</div >}>
+                {words && words?.map((val) => <Link key={val.id} href={`/search/${val.word}`} className='h-fit'>
+                    <span className='font-serif hover:bg-sky-100 hover:underline'>{val.word}</span>
+                </Link>)}
+            </Suspense>
         </>
     )
 }

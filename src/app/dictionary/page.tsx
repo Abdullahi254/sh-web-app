@@ -23,9 +23,7 @@ const page = (props: Props) => {
                         key={String.fromCharCode("A".charCodeAt(0) + index)}
                         letter={String.fromCharCode("A".charCodeAt(0) + index)}
                     >
-                        < Suspense fallback={< div > Loading...</div >}>
-                            <WordsList letter={String.fromCharCode("A".charCodeAt(0) + index)} />
-                        </Suspense>
+                        <WordsList letter={String.fromCharCode("A".charCodeAt(0) + index)} />
                     </DropDown>
                 )
             }
